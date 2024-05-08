@@ -13,3 +13,9 @@ python -m venv virtualenv
 2. Hacer click en *Yes* en el aviso que surge.
 
 ![Imagen de aviso de vs code](/assets/readme.img.png)
+
+3. Instalar las dependencias del proyecto:
+
+```
+pip install -r requieriments.txt
+```
