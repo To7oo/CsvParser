@@ -8,8 +8,6 @@ print("""
 
 """)
 
-
-
 base_path = './data/'
 list_of_files = os.listdir(base_path)
 
@@ -45,7 +43,7 @@ print('')
 
 newColumns = {
     'Dirección de correo electrónico': 'email',
-    '¿Cuál es el nombre de tu emprendimiento?': 'Name',
+    '¿Cuál es el nombre de tu emprendimiento?': 'name',
     '¿Cuáles son las redes sociales de tu emprendimiento? Adjunta el link.': 'socialMedia'
 }
 
@@ -54,10 +52,19 @@ filtered_keys =list(newColumns.values())
 list_data = []
 
 for path in valid_files:
+    
     df = pd.read_csv(path)
+    
     df.rename(columns=newColumns, inplace=True)
-    subset = df[filtered_keys]
+    columns = df.columns.values.tolist()
+    
+    if filtered_keys[2] in columns:
+        subset = df[filtered_keys]
+    else:
+        subset = df[[filtered_keys[0], filtered_keys[1]]]
+        
     list_data.append(subset)
+        
 
 print('Generate output...')
 pd.concat(list_data).to_csv(f"{base_path}output.csv", index=False)
