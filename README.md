@@ -17,5 +17,5 @@ python -m venv virtualenv
 3. Instalar las dependencias del proyecto:
 
 ```
-pip install -r requieriments.txt
+pip install -r requirements.txt
 ```
