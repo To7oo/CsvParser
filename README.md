@@ -1,5 +1,4 @@
 # CsvParser
----
 
 Se trata de un programa el cual lee archivos `.csv` y extrae ciertos datos y los acumula en un nuevo archivo.
 
@@ -13,3 +12,9 @@ python -m venv virtualenv
 2. Hacer click en *Yes* en el aviso que surge.
 
 ![Imagen de aviso de vs code](/assets/readme.img.png)
+
+3. Instalar las dependencias del proyecto:
+
+```
+pip install -r requirements.txt
+```
