@@ -1,5 +1,4 @@
 # CsvParser
----
 
 Se trata de un programa el cual lee archivos `.csv` y extrae ciertos datos y los acumula en un nuevo archivo.
 
