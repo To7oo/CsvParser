@@ -65,7 +65,6 @@ for path in valid_files:
         
     list_data.append(subset)
 
-
 print("Generate output...")
 pd.concat(list_data).to_csv(f"{base_path}output.csv", index=False)
 
