@@ -41,13 +41,13 @@ for invalid_file in invalid_files:
 
 print("")   
 
-newColumns = {
+new_columns = {
     "Dirección de correo electrónico": "email",
     "¿Cuál es el nombre de tu emprendimiento?": "name",
     "¿Cuáles son las redes sociales de tu emprendimiento? Adjunta el link.": "socialMedia"
 }
 
-filtered_keys =list(newColumns.values())
+filtered_keys =list(new_columns.values())
 
 list_data = []
 
@@ -55,13 +55,18 @@ for path in valid_files:
     
     df = pd.read_csv(path)
     
-    df.rename(columns=newColumns, inplace=True)
+    df.rename(columns=new_columns, inplace=True)
     columns = df.columns.values.tolist()
     
-    if filtered_keys[2] in columns:
+    elements_missing = list(set(filtered_keys) - set(columns))
+    
+    if len(elements_missing) == 0:
         subset = df[filtered_keys]
     else:
-        subset = df[[filtered_keys[0], filtered_keys[1]]]
+        sub_filtered_keys = filtered_keys.copy()
+        for element in elements_missing:
+            sub_filtered_keys.remove(element)
+        subset = df[sub_filtered_keys]
         
     list_data.append(subset)
 
