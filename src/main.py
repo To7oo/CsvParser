@@ -64,7 +64,7 @@ for path in valid_files:
         subset = df[[filtered_keys[0], filtered_keys[1]]]
         
     list_data.append(subset)
-        
+
 
 print("Generate output...")
 pd.concat(list_data).to_csv(f"{base_path}output.csv", index=False)
