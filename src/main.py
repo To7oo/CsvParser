@@ -9,7 +9,7 @@ print("""
 
 """)
 
-with open("config/config.json") as json_file:
+with open("config/config.json", encoding='utf-8') as json_file:
     config = json.load(json_file)
     
 print("Reading config...")
