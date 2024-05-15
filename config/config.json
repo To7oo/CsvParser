@@ -1,0 +1,9 @@
+{
+    "column_keys": {
+        "Dirección de correo electrónico": "email",
+        "¿Cuál es el nombre de tu emprendimiento?": "name",
+        "¿Cuáles son las redes sociales de tu emprendimiento? Adjunta el link.": "socialMedia"
+    },
+    "output_folder_name": "outputs",
+    "base_path": "./data/"
+}

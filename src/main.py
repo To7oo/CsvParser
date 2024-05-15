@@ -1,4 +1,5 @@
-import os, pandas as pd
+import os, json, pandas as pd
+from plugins.data_manager import DataManager
 
 print("""
 
@@ -8,7 +9,14 @@ print("""
 
 """)
 
-base_path = "./data/"
+with open("config/config.json") as json_file:
+    config = json.load(json_file)
+    
+print("Reading config...")
+
+base_path = config.get("base_path")
+foldername = config.get("output_folder_name")
+
 list_of_files = os.listdir(base_path)
 
 files_count = len(list_of_files)
@@ -39,23 +47,18 @@ print(f"Invalid files: {invalid_files_count}\n")
 for invalid_file in invalid_files:
     print(f"Invalid file: {invalid_file}")
 
-print("")   
+print("")
 
-new_columns = {
-    "Dirección de correo electrónico": "email",
-    "¿Cuál es el nombre de tu emprendimiento?": "name",
-    "¿Cuáles son las redes sociales de tu emprendimiento? Adjunta el link.": "socialMedia"
-}
-
-filtered_keys =list(new_columns.values())
+filtered_keys = list(config.get("column_keys").values())
 
 list_data = []
 
 for path in valid_files:
     
-    df = pd.read_csv(path)
+    dataManager = DataManager(path, config.get("column_keys"))
     
-    df.rename(columns=new_columns, inplace=True)
+    df = dataManager.dataframe
+
     columns = df.columns.values.tolist()
     
     elements_missing = list(set(filtered_keys) - set(columns))
@@ -72,18 +75,15 @@ for path in valid_files:
 
 print("Generate output...")
 
+root_dir = os.path.curdir
 
-
-foldername = "output"
-
-route = "D:\proyects\clases\CsvParser"
-
-out_route = os.path.join(route, foldername)
+out_route = os.path.join(root_dir, foldername)
 
 if not os.path.exists(out_route):
-    os.makedirs(out_route)
+    os.mkdir(out_route)
 
-pd.concat(list_data).to_csv(f"{out_route}\\output.csv", index=False)
+file_amount = len(os.listdir(out_route))
+filename = f"output-{file_amount + 1}.csv"
+
+pd.concat(list_data).to_csv(f"{out_route}\\{filename}", index=False)
 print("Done!")
-
-
