@@ -71,6 +71,19 @@ for path in valid_files:
     list_data.append(subset)
 
 print("Generate output...")
-pd.concat(list_data).to_csv(f"{base_path}output.csv", index=False)
 
+
+
+foldername = "output"
+
+route = "D:\proyects\clases\CsvParser"
+
+out_route = os.path.join(route, foldername)
+
+if not os.path.exists(out_route):
+    os.makedirs(out_route)
+
+pd.concat(list_data).to_csv(f"{out_route}\\output.csv", index=False)
 print("Done!")
+
+
