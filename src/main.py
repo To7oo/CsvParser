@@ -24,13 +24,13 @@ invalid_files = []
 
 for file in files_list:
     
-    is_valid_file = os.path.isfile(config.base_path + file) & file.endswith(".csv")
-    print(f"Reading {config.base_path + file}")
+    print(f"Reading {file}")
+    is_valid_file = os.path.isfile(file) & file.endswith(".csv")
     
     if is_valid_file:
-        valid_files.append(config.base_path + file)
+        valid_files.append(file)
     else:
-        invalid_files.append(config.base_path + file)
+        invalid_files.append(file)
 
 print("")
 
