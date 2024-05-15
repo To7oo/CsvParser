@@ -13,16 +13,16 @@ print("""
 print("Reading config...")
 config = ConfigManager("config/config.json").get_config()
 
-list_of_files = os.listdir(config.base_path)
+filename_list = os.listdir(config.base_path)
 
-files_amount = len(list_of_files)
+files_list = [os.path.join(config.base_path, file) for file in filename_list]
 
-print(f"Files found: {files_amount}\n")
+print(f"Files found: { len(files_list) }\n")
 
 valid_files = []
 invalid_files = []
 
-for file in list_of_files:
+for file in files_list:
     
     is_valid_file = os.path.isfile(config.base_path + file) & file.endswith(".csv")
     print(f"Reading {config.base_path + file}")
